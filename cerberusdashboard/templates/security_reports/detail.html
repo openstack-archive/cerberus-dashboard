@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load i18n sizeformat %}
+{% block title %}{% trans "Security Report Details" %}{% endblock %}
+
+{% block page_header %}
+  {% include "horizon/common/_page_header.html" with title=_("Security Report Details: ")|add:security_report.id %}
+{% endblock page_header %}
+
+{% block main %}
+<div class="row">
+  <div class="span12">
+  {{ tab_group.render }}
+  </div>
+</div>
+{% endblock %}
