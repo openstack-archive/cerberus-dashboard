@@ -1,0 +1,8 @@
+Code-Review+2: Anthony Michon <anthony.michon@eurogiciel.fr>
+Workflow+1: Anthony Michon <anthony.michon@eurogiciel.fr>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Mon, 11 May 2015 13:11:34 +0000
+Reviewed-on: https://review.openstack.org/181879
+Project: stackforge/cerberus-dashboard
+Branch: refs/heads/master
