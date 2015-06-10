@@ -15,9 +15,13 @@
 #
 
 from cerberusclient.common import exceptions as cerberusclient
-from sticksclient.common import exceptions as sticksclient
+try:
+    from sticksclient.common import exceptions as sticksclient
+    # HTTPInternalServerError is thrown by Redmine when project does not exist
+    # This error may change in the future (refer to sticks client)
+    RECOVERABLE = (sticksclient.HTTPInternalServerError,)
+except ImportError:
+    RECOVERABLE = ()
+    pass
 
 NOT_FOUND = (cerberusclient.HTTPNotFound,)
-# HTTPInternalServerError is thrown by Redmine when project does not exist
-# This error may change in the future (refer to sticks client)
-RECOVERABLE = (sticksclient.HTTPInternalServerError,)

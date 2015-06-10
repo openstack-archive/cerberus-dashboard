@@ -53,7 +53,8 @@ class CreateTicket(tables.BatchAction):
 
     def allowed(self, request, report=None):
         """Allow terminate action if instance not currently being deleted."""
-        return not(is_associated(report))
+        return not(is_associated(report)) \
+            and api.cerberus.is_sticks_available(request)
 
     def action(self, request, report_id):
         report = api.cerberus.security_report_get(request, report_id)
