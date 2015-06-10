@@ -19,7 +19,13 @@ import logging
 from cerberusclient import client as cerberus_client
 from horizon.utils.memoized import memoized  # noqa
 from openstack_dashboard.api import base
-from sticksclient import client as sticks_client
+try:
+    from sticksclient import client as sticks_client
+    from sticksclient.common import exceptions as sticks_exc
+except ImportError:
+    sticks_exc = None
+    sticks_client = None
+    pass
 
 from cerberusdashboard.utils import importutils
 
@@ -130,3 +136,16 @@ def security_alarm_put_ticket_id(request, sa_id, ticket_id):
 def ticket_create(request, data):
     """Create a ticket from a security report."""
     return sticksclient(request).tickets.create(data)
+
+
+def is_sticks_available(request):
+    """Create a ticket from a security report."""
+    if sticks_client is None:
+        LOG.exception("No module named sticksclient")
+        return False
+    try:
+        return isinstance(sticksclient(request).tickets.list(
+            data={'project': request.user.tenant_id}), list)
+    except sticks_exc.CommunicationError as e:
+        LOG.exception(e)
+        return False
