@@ -1,0 +1,8 @@
+Verified+2: Jenkins
+Code-Review+2: Ziba <romain.ziba@eurogiciel.fr>
+Workflow+1: Ziba <romain.ziba@eurogiciel.fr>
+Submitted-by: Jenkins
+Submitted-at: Wed, 10 Jun 2015 14:58:29 +0000
+Reviewed-on: https://review.openstack.org/190079
+Project: stackforge/cerberus-dashboard
+Branch: refs/heads/master
