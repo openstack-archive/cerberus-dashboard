@@ -25,6 +25,6 @@ urlpatterns = patterns('',
                            name='index'),
                        url(r'^$', views.IndexView.as_view(),
                            name='security_reports'),
-                       url(r'^(?P<report_id>[^/]+)$',
+                       url(r'^(?P<report_uuid>[^/]+)$',
                            views.DetailView.as_view(),
                            name='details'),)

@@ -3,7 +3,7 @@
 {% block title %}{% trans "Security Report Details" %}{% endblock %}
 
 {% block page_header %}
-  {% include "horizon/common/_page_header.html" with title=_("Security Report Details: ")|add:security_report.id %}
+  {% include "horizon/common/_page_header.html" with title=_("Security Report Details: ")|add:security_report.uuid %}
 {% endblock page_header %}
 
 {% block main %}

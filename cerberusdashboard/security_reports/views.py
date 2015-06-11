@@ -52,16 +52,16 @@ class DetailView(tabs.TabbedTableView):
         return context
 
     def get_data(self):
-        report_id = self.kwargs['report_id']
+        report_uuid = self.kwargs['report_uuid']
         try:
             security_report = cerberus.security_report_get(
-                self.request, report_id)
+                self.request, report_uuid)
         except Exception as e:
             LOG.exception(e)
             redirect = reverse_lazy(self.redirect_url)
             exceptions.handle(self.request,
                               _('Unable to retrieve details for '
-                                'security report "%s".') % report_id,
+                                'security report "%s".') % report_uuid,
                               redirect=redirect)
             # Not all exception types handled above will result in a redirect.
             # Need to raise here just in case.

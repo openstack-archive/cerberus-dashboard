@@ -107,14 +107,14 @@ def security_report_list(request):
     return cerberusclient(request).security_reports.list()
 
 
-def security_report_get(request, sr_id):
+def security_report_get(request, sr_uuid):
     """Get a security report."""
-    return cerberusclient(request).security_reports.get(sr_id)
+    return cerberusclient(request).security_reports.get(sr_uuid)
 
 
-def security_report_put_ticket_id(request, sr_id, ticket_id):
+def security_report_put_ticket_id(request, sr_uuid, ticket_id):
     """Update a security report by adding its associated ticket id."""
-    return cerberusclient(request).security_reports.put(sr_id, ticket_id)
+    return cerberusclient(request).security_reports.put(sr_uuid, ticket_id)
 
 
 def security_alarm_list(request):

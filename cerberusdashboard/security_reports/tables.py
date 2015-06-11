@@ -56,13 +56,13 @@ class CreateTicket(tables.BatchAction):
         return not(is_associated(report)) \
             and api.cerberus.is_sticks_available(request)
 
-    def action(self, request, report_id):
-        report = api.cerberus.security_report_get(request, report_id)
+    def action(self, request, report_uuid):
+        report = api.cerberus.security_report_get(request, report_uuid)
         data = {'project': report.project_id, 'title': report.title}
         try:
             ticket = api.cerberus.ticket_create(request, data)
             api.cerberus.security_report_put_ticket_id(request,
-                                                       report_id,
+                                                       report_uuid,
                                                        ticket.id)
         except Exception as e:
             LOG.exception(e)
@@ -92,10 +92,10 @@ class ShowTicket(tables.LinkAction):
 
 
 class SecurityReportsTable(tables.DataTable):
-    report_id = tables.Column("id",
-                              link=("horizon:security:security_reports:"
-                                    "details"),
-                              verbose_name="id",)
+    report_uuid = tables.Column("uuid",
+                                link=("horizon:security:security_reports:"
+                                      "details"),
+                                verbose_name="uuid",)
     title = tables.Column("title", verbose_name=_("Title"))
     description = tables.Column("description", verbose_name=_("Description"))
     plugin_id = tables.Column("plugin_id", verbose_name=_("Plugin"))
@@ -114,6 +114,9 @@ class SecurityReportsTable(tables.DataTable):
         name = "security_reports"
         verbose_name = _("Security Reports")
         row_actions = (CreateTicket, ShowTicket)
+
+    def get_object_id(self, report):
+        return report.uuid
 
 
 class VulnerabilitiesTable(tables.DataTable):
